@@ -2,16 +2,16 @@
 
 SLIDE_OPTIONS=-t revealjs --css=./docs/custom.css -s
 
-all: slides.html
+all: index.html
 
-slides.html: slides.md reveal.js/css/reveal.scss
+index.html: slides.md reveal.js/css/reveal.scss
 	pandoc $(SLIDE_OPTIONS) $< -o docs/$@
 
-watch: slides.md reveal.js/css/reveal.scss slides.html
-	fswatch -o --event Updated $< | xargs -n1 -I{} sh -c "echo Rebuilding...; pandoc $(SLIDE_OPTIONS) $< -o slides.html"
+watch: slides.md reveal.js/css/reveal.scss index.html
+	fswatch -o --event Updated $< | xargs -n1 -I{} sh -c "echo Rebuilding...; pandoc $(SLIDE_OPTIONS) $< -o index.html"
 
 full: slides.md reveal.js/css/reveal.scss
-	pandoc $(SLIDE_OPTIONS) --self-contained $< -o slides.html
+	pandoc $(SLIDE_OPTIONS) --self-contained $< -o index.html
 
 reveal_version=4.5.0
 

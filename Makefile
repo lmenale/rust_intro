@@ -1,11 +1,11 @@
 # https://pandoc.org/MANUAL.html#slide-shows
 
-SLIDE_OPTIONS=-t revealjs --css=./custom.css -s
+SLIDE_OPTIONS=-t revealjs --css=./docs/custom.css -s
 
 all: slides.html
 
 slides.html: slides.md reveal.js/css/reveal.scss
-	pandoc $(SLIDE_OPTIONS) $< -o $@
+	pandoc $(SLIDE_OPTIONS) $< -o docs/$@
 
 watch: slides.md reveal.js/css/reveal.scss slides.html
 	fswatch -o --event Updated $< | xargs -n1 -I{} sh -c "echo Rebuilding...; pandoc $(SLIDE_OPTIONS) $< -o slides.html"
